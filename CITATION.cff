@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+type: software
+title: "Sparse and One-Bit Steering Vectors: How Few Residual Dimensions Does It Take to Flip GPT-1's Sentiment?"
+authors:
+  - family-names: Keloth
+    given-names: Hanish
+    affiliation: "Palette Co. Ltd."
+date-released: 2026-09-08
+license: MIT
+repository-code: "https://github.com/hanishkeloth/sparse-steer-gpt1"
+url: "https://hanishkeloth.github.io/sparse-steer-gpt1/"
+keywords: [steering vectors, activation steering, sparsity, one-bit, interpretability, GPT-1]
+abstract: "A sparse activation-steering vector retains exactly the fraction of the full steering effect that its cosine with the dense vector predicts (r = 0.90). Keeping 96 of 768 residual dimensions retains 54-72% of the effect; one-bit sign-only vectors match top-k at every k. Open-weight per-block vectors for GPT-1, code, and all generations are released."

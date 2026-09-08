@@ -1,4 +1,6 @@
-# sparse-steer-gpt1
+# sparse-steer-gpt1 — Sparse & One-Bit Steering Vectors (GPT-1)
+
+[![Paper](https://img.shields.io/badge/paper-web%20%7C%20PDF-2a78d6)](https://hanishkeloth.github.io/sparse-steer-gpt1/) [![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-vectors-yellow)](https://huggingface.co/Hanish/sparse-steer-gpt1) [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE) [![Cite](https://img.shields.io/badge/cite-CITATION.cff-lightgrey)](CITATION.cff)
 
 **Paper (web):** https://hanishkeloth.github.io/sparse-steer-gpt1/ · **PDF:** [paper/paper.pdf](paper/paper.pdf) · **Vectors on Hugging Face:** https://huggingface.co/Hanish/sparse-steer-gpt1
 
@@ -6,6 +8,15 @@
 A tiny, fully reproducible study of *sparse* and *one-bit* activation-steering vectors on the
 original 2018 GPT (GPT-1, 117M) — a base model you can fetch with a single `git clone`, no model hub
 required.
+
+## Key findings (TL;DR)
+
+1. **Retention = cosine.** A sparse steering vector retains exactly the fraction of the full effect that its cosine with the dense vector predicts — r = 0.90, slope 0.92 across 67 top-k / sign-k / random-k variants. Sparse steering works precisely as well as linear response predicts.
+2. **96 of 768 dimensions keep 54–72 %** of the steering effect; 12 dimensions keep 29–47 %. No cliff.
+3. **One bit per kept coordinate is enough** — sign-only vectors match top-k at every k (a 96-dim one-bit sentiment vector is ~130 bytes).
+4. **Random supports retain about half** of top-magnitude supports at the same k.
+5. The strongest coordinates are GPT-1's high-variance **"rogue" residual channels** (dim 373 at blocks 8–10).
+6. In GPT-1, sentiment becomes linearly readable at the sentence-final period **only from block 6** onward.
 
 This repo ships:
 
