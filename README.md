@@ -61,7 +61,7 @@ See `paper/paper.md` for results.
 ```
 @misc{sparsesteer2026,
   title  = {Sparse and One-Bit Steering Vectors: How Few Residual Dimensions Does It Take to Flip GPT-1's Sentiment?},
-  author = {Hanish and Claude},
+  author = {Hanish Keloth},
   year   = {2026},
   url    = {https://github.com/hanishkeloth/sparse-steer-gpt1}
 }
