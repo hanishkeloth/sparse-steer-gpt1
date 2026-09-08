@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+paper/*.aux
+paper/*.log
+lmodern.sty

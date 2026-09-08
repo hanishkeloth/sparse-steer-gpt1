@@ -1,0 +1,8 @@
+torch>=2.2
+transformers>=4.40
+safetensors>=0.4
+numpy
+matplotlib
+ftfy
+spacy>=3.0
+vaderSentiment
