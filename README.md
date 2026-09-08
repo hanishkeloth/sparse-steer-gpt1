@@ -1,5 +1,7 @@
 # sparse-steer-gpt1
 
+**Paper (web):** https://hanishkeloth.github.io/sparse-steer-gpt1/ · **PDF:** [paper/paper.pdf](paper/paper.pdf) · **Vectors on Hugging Face:** https://huggingface.co/Hanish/sparse-steer-gpt1
+
 **How few residual-stream dimensions does it take to steer a language model?**
 A tiny, fully reproducible study of *sparse* and *one-bit* activation-steering vectors on the
 original 2018 GPT (GPT-1, 117M) — a base model you can fetch with a single `git clone`, no model hub
@@ -61,7 +63,7 @@ See `paper/paper.md` for results.
   title  = {Sparse and One-Bit Steering Vectors: How Few Residual Dimensions Does It Take to Flip GPT-1's Sentiment?},
   author = {Hanish and Claude},
   year   = {2026},
-  url    = {https://github.com/...}
+  url    = {https://github.com/hanishkeloth/sparse-steer-gpt1}
 }
 ```
 
