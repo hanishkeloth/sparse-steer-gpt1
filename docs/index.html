@@ -5,7 +5,8 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Hanish Keloth (Palette Co. Ltd.)" />
-  <title>Sparse and One-Bit Steering Vectors (GPT-1)</title>
+  <title>Sparse and One-Bit Steering Vectors: Sparse Steering Works
+Exactly as Cosine Predicts (GPT-1) ��� Hanish Keloth</title>
   <style>
 html {
 font-size: 10pt;
@@ -164,18 +165,85 @@ vertical-align: middle;
 }
 </style>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Sparse and one-bit activation steering vectors on GPT-1: a sparse steering vector retains exactly the fraction of effect its cosine with the dense vector predicts (r = 0.90). 96 of 768 dimensions keep 54–72% of the effect; sign-only (1-bit) vectors match top-k. Open weights, code, 5,664 generations.">
+  <meta name="keywords" content="steering vectors, activation steering, sparse steering vectors, one-bit steering, contrastive activation addition, GPT-1, residual stream, interpretability, representation engineering, rogue dimensions, open weights, Hanish Keloth, Palette">
+  <meta name="author" content="Hanish Keloth">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <link rel="canonical" href="https://hanishkeloth.github.io/sparse-steer-gpt1/">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Hanish Keloth — weekly open-weight research">
+  <meta property="og:title" content="Sparse and One-Bit Steering Vectors: How Few Residual Dimensions Does It Take to Flip GPT-1&#39;s Sentiment?">
+  <meta property="og:description" content="A sparse steering vector retains exactly the fraction of effect that its cosine with the dense vector predicts (r = 0.90, slope 0.92). One bit per kept coordinate is enough. Open weights + code + every generation.">
+  <meta property="og:url" content="https://hanishkeloth.github.io/sparse-steer-gpt1/">
+  <meta property="og:image" content="https://hanishkeloth.github.io/sparse-steer-gpt1/og-card.png">
+  <meta property="og:image:width" content="1280"><meta property="og:image:height" content="640">
+  <meta property="article:published_time" content="2026-09-08">
+  <meta property="article:author" content="Hanish Keloth">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sparse and One-Bit Steering Vectors (GPT-1)">
+  <meta name="twitter:description" content="Sparse steering works exactly as well as its cosine with the dense vector predicts — and one bit per coordinate is enough. Open weights + code.">
+  <meta name="twitter:image" content="https://hanishkeloth.github.io/sparse-steer-gpt1/og-card.png">
+  <!-- Google Scholar / Highwire Press tags -->
+  <meta name="citation_title" content="Sparse and One-Bit Steering Vectors: How Few Residual Dimensions Does It Take to Flip GPT-1&#39;s Sentiment?">
+  <meta name="citation_author" content="Keloth, Hanish">
+  <meta name="citation_author_institution" content="Palette Co. Ltd.">
+  <meta name="citation_publication_date" content="2026/09/08">
+  <meta name="citation_online_date" content="2026/09/08">
+  <meta name="citation_pdf_url" content="https://hanishkeloth.github.io/sparse-steer-gpt1/paper.pdf">
+  <meta name="citation_fulltext_html_url" content="https://hanishkeloth.github.io/sparse-steer-gpt1/">
+  <meta name="citation_abstract_html_url" content="https://hanishkeloth.github.io/sparse-steer-gpt1/">
+  <meta name="citation_language" content="en">
+  <meta name="citation_keywords" content="steering vectors; activation steering; sparsity; interpretability; GPT-1">
+  <meta name="citation_technical_report_institution" content="Palette Co. Ltd.">
+  <meta name="dc.title" content="Sparse and One-Bit Steering Vectors: How Few Residual Dimensions Does It Take to Flip GPT-1&#39;s Sentiment?">
+  <meta name="dc.creator" content="Hanish Keloth"><meta name="dc.date" content="2026-09-08"><meta name="dc.type" content="Text"><meta name="dc.language" content="en">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@graph":[
+  {"@type":"ScholarlyArticle","@id":"https://hanishkeloth.github.io/sparse-steer-gpt1/#article",
+   "headline":"Sparse and One-Bit Steering Vectors: How Few Residual Dimensions Does It Take to Flip GPT-1's Sentiment?",
+   "name":"Sparse and One-Bit Steering Vectors","datePublished":"2026-09-08","dateModified":"2026-09-08","inLanguage":"en",
+   "url":"https://hanishkeloth.github.io/sparse-steer-gpt1/","image":"https://hanishkeloth.github.io/sparse-steer-gpt1/og-card.png",
+   "author":{"@type":"Person","@id":"https://www.linkedin.com/in/hanishkeloth/#person","name":"Hanish Keloth","jobTitle":"CTO","affiliation":{"@type":"Organization","name":"Palette Co. Ltd."},"sameAs":["https://www.linkedin.com/in/hanishkeloth/","https://github.com/hanishkeloth","https://huggingface.co/Hanish"]},
+   "publisher":{"@type":"Organization","name":"Palette Co. Ltd."},
+   "abstract":"Activation steering adds a fixed vector to a transformer's residual stream. We ask how much of that dense vector is necessary. On GPT-1 (117M) we extract mean-difference sentiment vectors at every block and sparsify them (top-k, sign-only one-bit, random-k). The retained effect equals the cosine between the sparse and dense directions (r = 0.90, slope 0.92 across 67 variants); 96 of 768 dimensions keep 54–72% of the effect; one-bit vectors match top-k at every k; random supports retain about half; the strongest coordinates are high-variance rogue residual channels; sentiment becomes linearly readable at the sentence-final period only from block 6.",
+   "keywords":["steering vectors","activation steering","sparse steering","one-bit steering","interpretability","GPT-1","residual stream","representation engineering"],
+   "license":"https://opensource.org/licenses/MIT",
+   "encoding":{"@type":"MediaObject","encodingFormat":"application/pdf","contentUrl":"https://hanishkeloth.github.io/sparse-steer-gpt1/paper.pdf"},
+   "isBasedOn":"https://github.com/openai/finetune-transformer-lm",
+   "citation":["https://arxiv.org/abs/2312.06681","https://arxiv.org/abs/2308.10248","https://arxiv.org/abs/2402.17762"],
+   "associatedMedia":[{"@type":"SoftwareSourceCode","name":"sparse-steer-gpt1","codeRepository":"https://github.com/hanishkeloth/sparse-steer-gpt1","programmingLanguage":"Python","license":"https://opensource.org/licenses/MIT"},
+                      {"@type":"Dataset","name":"GPT-1 sentiment steering vectors","url":"https://huggingface.co/Hanish/sparse-steer-gpt1","license":"https://opensource.org/licenses/MIT"}]},
+  {"@type":"FAQPage","mainEntity":[
+   {"@type":"Question","name":"What is a sparse steering vector?","acceptedAnswer":{"@type":"Answer","text":"A steering vector with only k non-zero coordinates of the residual stream (k out of 768 in GPT-1), obtained by keeping the k largest-magnitude coordinates of a mean-difference (contrastive) steering vector and rescaling to the original norm."}},
+   {"@type":"Question","name":"How much steering effect survives sparsification?","acceptedAnswer":{"@type":"Answer","text":"Exactly as much as the cosine between the sparse direction and the dense direction predicts: across 67 top-k, sign-k and random-k variants on GPT-1, retained effect ≈ cosine with r = 0.90 and slope 0.92. Keeping 96 of 768 dimensions retains 54–72% of the effect; 12 dimensions retain 29–47%."}},
+   {"@type":"Question","name":"Do one-bit (sign-only) steering vectors work?","acceptedAnswer":{"@type":"Answer","text":"Yes. Keeping only the signs (±1) of the top-k coordinates matches top-k with magnitudes at every k in GPT-1, so a steering behaviour can be shipped as a few dozen indices and signs (about 130 bytes for k = 96)."}},
+   {"@type":"Question","name":"Which model and evaluator were used?","acceptedAnswer":{"@type":"Answer","text":"The original 2018 OpenAI GPT (GPT-1, 117M parameters, post-LayerNorm), loaded from OpenAI's original NumPy shards; steering effect measured as the VADER sentiment gap between positively and negatively steered continuations on 24 neutral prompts; fluency cost as extra NLL under the unsteered model."}},
+   {"@type":"Question","name":"Where are the weights and code?","acceptedAnswer":{"@type":"Answer","text":"Per-block steering vectors (safetensors, 76 KB) are on Hugging Face at huggingface.co/Hanish/sparse-steer-gpt1; code, all 5,664 generations and the paper are at github.com/hanishkeloth/sparse-steer-gpt1 (MIT license)."}}]}
+  ]}
+  </script>
   <style>
 body{max-width:820px;margin:2rem auto;padding:0 1.2rem;font:16px/1.55 Georgia,"DejaVu Serif",serif;color:#1a1a1a;background:#fff}
 h1{font-size:1.7rem;line-height:1.25} h2{margin-top:2rem;border-bottom:1px solid #ddd;padding-bottom:.2rem}
 figure{margin:1.4rem 0;text-align:center} figure img{max-width:100%} figcaption{font-size:.85rem;color:#555;margin-top:.4rem}
 table{border-collapse:collapse;font-size:.85rem;margin:1rem auto} th,td{border-bottom:1px solid #ddd;padding:.25rem .5rem;text-align:right} th:first-child,td:first-child{text-align:left}
-code{font-family:"DejaVu Sans Mono",monospace;font-size:.85em;background:#f4f4f4;padding:0 .2em}
+code{font-family:"DejaVu Sans Mono",monospace;font-size:.85em;background:#f4f4f4;padding:0 .2em} pre{background:#f4f4f4;padding:.8rem;overflow-x:auto;font-size:.8rem}
 .author,.date{text-align:center;color:#555} .title{text-align:center}
-.links{text-align:center;margin:1rem 0 2rem} .links a{margin:0 .6rem}
+.links{text-align:center;margin:1rem 0 1.5rem} .links a{margin:0 .6rem}
+.tldr{background:#f0f5fc;border-left:4px solid #2a78d6;padding:.8rem 1.1rem;margin:1.2rem 0;font-family:"DejaVu Sans",sans-serif;font-size:.95rem}
+.tldr h2{margin:0 0 .5rem;border:0;font-size:1.05rem} .tldr ul{margin:.3rem 0 0 1.1rem;padding:0} .tldr li{margin:.25rem 0}
+.faq h3{font-size:1rem;margin:1rem 0 .2rem}
 </style>
 </head>
 <body>
-<p class="links"><a href="paper.pdf">PDF</a> · <a href="https://github.com/hanishkeloth/sparse-steer-gpt1">Code &amp; vectors (GitHub)</a> · <a href="https://huggingface.co/Hanish/sparse-steer-gpt1">Vectors on Hugging Face</a></p>
+<p class="links"><a href="paper.pdf">PDF</a> · <a href="https://github.com/hanishkeloth/sparse-steer-gpt1">Code &amp; results (GitHub)</a> · <a href="https://huggingface.co/Hanish/sparse-steer-gpt1">Vectors on Hugging Face</a> · <a href="#cite">Cite</a></p>
+<div class="tldr"><h2>TL;DR — key findings</h2><ul>
+<li><b>Retention = cosine.</b> A sparse steering vector keeps exactly the fraction of the full steering effect that its cosine with the dense vector predicts (r = 0.90, slope 0.92, 67 variants). Sparse steering works precisely as well as linear response says — no better, no worse.</li>
+<li><b>96 of 768 dimensions</b> keep 54–72% of the effect; 12 dimensions keep 29–47%; there is no cliff.</li>
+<li><b>One bit per coordinate is enough.</b> Sign-only (±1) vectors match top-k at every k; a 96-dimension one-bit sentiment vector is ~130 bytes.</li>
+<li><b>Random supports retain about half</b> of what top-magnitude supports retain at the same k.</li>
+<li>The strongest coordinates are GPT-1&#39;s high-variance <b>“rogue” residual channels</b> (dimension 373 at blocks 8–10).</li>
+<li>In GPT-1, sentiment becomes linearly readable at the sentence-final period <b>only from block 6</b> onward.</li>
+</ul></div>
 <header id="title-block-header">
 <h1 class="title">Sparse and One-Bit Steering Vectors: How Few Residual
 Dimensions Does It Take to Flip GPT-1’s Sentiment?</h1>
@@ -712,5 +780,18 @@ Quality.</em> EMNLP.</li>
 <li>Sun, M., Chen, X., Kolter, J. Z., Liu, Z. (2024). <em>Massive
 Activations in Large Language Models.</em> arXiv:2402.17762.</li>
 </ul>
+<section class="faq"><h2>FAQ</h2>
+<h3>What is a sparse steering vector?</h3><p>A steering vector with only <i>k</i> non-zero residual-stream coordinates, obtained by keeping the <i>k</i> largest-magnitude coordinates of a contrastive mean-difference vector and rescaling to the original norm. A one-bit (sign-<i>k</i>) vector keeps only their signs.</p>
+<h3>How much of the effect survives sparsification?</h3><p>As much as the cosine between the sparse and dense directions predicts: 96 of 768 dimensions keep 54–72% of GPT-1&#39;s sentiment-steering effect, 12 keep 29–47%, one keeps 0–19%.</p>
+<h3>Is this the same as SAE-based sparse steering?</h3><p>No. SAE methods are sparse in a learned dictionary; this study is sparse in the model&#39;s own residual coordinates, and gives the null baseline any dimension-selection method (e.g. learned gates) should beat.</p>
+<h3>Can I use the vectors?</h3><p>Yes — MIT licensed. Load <code>gpt1_sentiment_vectors.safetensors</code> from Hugging Face and add ±β·u to the output of block 9 (c = 0.25) or block 11 (c = 0.5) of GPT-1; see <code>src/steer.py</code>.</p>
+</section>
+<section id="cite"><h2>Cite</h2><pre>@misc{keloth2026sparsesteer,
+  title  = {Sparse and One-Bit Steering Vectors: How Few Residual Dimensions Does It Take to Flip GPT-1&#39;s Sentiment?},
+  author = {Keloth, Hanish},
+  year   = {2026}, month = sep,
+  howpublished = {\url{https://hanishkeloth.github.io/sparse-steer-gpt1/}},
+  note   = {Code: github.com/hanishkeloth/sparse-steer-gpt1; weights: huggingface.co/Hanish/sparse-steer-gpt1}
+}</pre></section>
 </body>
 </html>
