@@ -1,6 +1,6 @@
 ---
 title: "Sparse and One-Bit Steering Vectors: How Few Residual Dimensions Does It Take to Flip GPT-1's Sentiment?"
-author: "Hanish (Palette Co. Ltd.) · with Claude"
+author: "Hanish Keloth (Palette Co. Ltd.)"
 date: "8 September 2026 · weekly open-weight project #1"
 geometry: margin=2.4cm
 fontsize: 10pt
